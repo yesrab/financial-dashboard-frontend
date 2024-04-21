@@ -81,7 +81,9 @@ const Home = () => {
       <div className={styles.tableNstatisticsContainer}>
         <div className={styles.statisticsContainer}>
           <Suspense fallback={<h1>Loading</h1>}>
-            <Await resolve={data.statsData}>
+            <Await
+              errorElement={<h1>Loading data error please check backend</h1>}
+              resolve={data.statsData}>
               {(data) => {
                 return (
                   <Stats
@@ -95,7 +97,9 @@ const Home = () => {
             </Await>
           </Suspense>
           <Suspense fallback={<h1>Loading</h1>}>
-            <Await resolve={data.statsData}>
+            <Await
+              errorElement={<h1>Loading data error please check backend</h1>}
+              resolve={data.statsData}>
               {(data) => {
                 return (
                   <Stats
@@ -107,7 +111,9 @@ const Home = () => {
             </Await>
           </Suspense>
           <Suspense fallback={<h1>Loading</h1>}>
-            <Await resolve={data.statsData}>
+            <Await
+              errorElement={<h1>Loading data error please check backend</h1>}
+              resolve={data.statsData}>
               {(data) => {
                 return (
                   <Stats
@@ -129,14 +135,18 @@ const Home = () => {
       </div>
       <div className={styles.graphNchart}>
         <Suspense fallback={blockLoader()}>
-          <Await resolve={data.statsData}>
+          <Await
+            errorElement={<h1>Loading data error please check backend</h1>}
+            resolve={data.statsData}>
             {(data) => {
               return <BarGraph statsData={data} month={month} />;
             }}
           </Await>
         </Suspense>
         <Suspense fallback={blockLoader()}>
-          <Await resolve={data.statsData}>
+          <Await
+            errorElement={<h1>Loading data error please check backend</h1>}
+            resolve={data.statsData}>
             {(data) => {
               return <PiChart statsData={data.itemsPerCatagory} />;
             }}

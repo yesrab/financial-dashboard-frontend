@@ -125,7 +125,9 @@ const TrasnsactionTable = ({
         </select>
       </div>
       <Suspense fallback={lodingMarkup()}>
-        <Await resolve={tableData}>
+        <Await
+          errorElement={<h1>Loading data error please check backend</h1>}
+          resolve={tableData}>
           {(tableData) => {
             return (
               <>
