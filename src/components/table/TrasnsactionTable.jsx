@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import styles from "./styles.module.css";
-import { useSearchParams } from "react-router-dom";
+import { Await, useSearchParams } from "react-router-dom";
 
 const monthNames = [
   "January",
@@ -91,10 +91,6 @@ const TrasnsactionTable = ({
     return (
       <div className={styles.loading}>
         <h2 className={styles.loadingText}>Loading...</h2>
-        <h2 className={styles.loadingText}>Loading...</h2>
-        <h2 className={styles.loadingText}>Loading...</h2>
-        <h2 className={styles.loadingText}>Loading...</h2>
-        <h2 className={styles.loadingText}>Loading...</h2>
       </div>
     );
   };
@@ -128,32 +124,42 @@ const TrasnsactionTable = ({
           })}
         </select>
       </div>
-      <div className={styles.tableWrapper}>
-        {generateTable(tableData?.transactions)}
-      </div>
-      <div className={styles.paginatorTool}>
-        page:{tableData.page}
-        <span className={styles.paginatorButtons}>
-          <button
-            className={styles.paginatorBtns}
-            disabled={!tableData?.previous}
-            onClick={() => {
-              setPage(tableData.previous.page);
-            }}>
-            {"<<Previous"}
-          </button>
+      <Suspense fallback={lodingMarkup()}>
+        <Await resolve={tableData}>
+          {(tableData) => {
+            return (
+              <>
+                <div className={styles.tableWrapper}>
+                  {generateTable(tableData?.transactions)}
+                </div>
+                <div className={styles.paginatorTool}>
+                  page:{tableData.page}
+                  <span className={styles.paginatorButtons}>
+                    <button
+                      className={styles.paginatorBtns}
+                      disabled={!tableData?.previous}
+                      onClick={() => {
+                        setPage(tableData.previous.page);
+                      }}>
+                      {"<<Previous"}
+                    </button>
 
-          <button
-            className={styles.paginatorBtns}
-            disabled={!tableData?.next}
-            onClick={() => {
-              setPage(tableData.next.page);
-            }}>
-            {"Next>>"}
-          </button>
-        </span>
-        count:{tableData.limit}
-      </div>
+                    <button
+                      className={styles.paginatorBtns}
+                      disabled={!tableData?.next}
+                      onClick={() => {
+                        setPage(tableData.next.page);
+                      }}>
+                      {"Next>>"}
+                    </button>
+                  </span>
+                  count:{tableData.limit}
+                </div>
+              </>
+            );
+          }}
+        </Await>
+      </Suspense>
     </div>
   );
 };

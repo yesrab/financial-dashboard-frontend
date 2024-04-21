@@ -31,3 +31,13 @@
   gap: 10px;
   justify-content: space-between;
 }
+
+.blockLoader {
+  background-color: #272953;
+  border-radius: 10px;
+  flex-grow: 1;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

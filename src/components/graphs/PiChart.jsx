@@ -4,8 +4,8 @@ import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
 import { Pie } from "react-chartjs-2";
 ChartJS.register(Tooltip, Legend, ArcElement);
 const PiChart = ({ statsData }) => {
-  const lable = generateLables(statsData?.itemsPerCatagory.catagroryCount);
-  const data = generateCounts(statsData?.itemsPerCatagory.catagroryCount);
+  const lable = generateLables(statsData?.catagroryCount);
+  const data = generateCounts(statsData?.catagroryCount);
   const option = {
     color: "white",
   };

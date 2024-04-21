@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styles from "./styles.module.css";
 import TrasnsactionTable from "../../components/table/TrasnsactionTable";
 import useDebounce from "../../hooks/useDebounce";
-import { useLoaderData, useSearchParams } from "react-router-dom";
+import { useLoaderData, useSearchParams, defer, Await } from "react-router-dom";
 import Stats from "../../components/stats/Stats";
 import fetchUtils from "../../libs/fetchUtils";
 import BarGraph from "../../components/graphs/BarGraph";
@@ -48,10 +48,10 @@ export const loader = async ({ request, params }) => {
     statsURL.searchParams.delete("limit");
     tableURL.searchParams.delete("limit");
   }
-  const tableData = await fetchUtils(tableURL.toString());
-  const statsData = await fetchUtils(statsURL.toString());
+  const tableData = fetchUtils(tableURL.toString());
+  const statsData = fetchUtils(statsURL.toString());
   // console.log(statsData);
-  return { tableData, statsData };
+  return defer({ tableData, statsData });
 };
 
 const Home = () => {
@@ -80,20 +80,44 @@ const Home = () => {
     <main className={styles.mainContent}>
       <div className={styles.tableNstatisticsContainer}>
         <div className={styles.statisticsContainer}>
-          <Stats
-            top={` ${data.statsData.transactionStatistics.totalSalesAmmount.toFixed(
-              2
-            )}$ `}
-            bottem={"Total sale amount"}
-          />
-          <Stats
-            top={data.statsData.transactionStatistics.TotalNumberOfSold}
-            bottem={"Total number of sold items"}
-          />
-          <Stats
-            top={data.statsData.transactionStatistics.TotalNumber0fNotSold}
-            bottem={"Total number of not sold items"}
-          />
+          <Suspense fallback={<h1>Loading</h1>}>
+            <Await resolve={data.statsData}>
+              {(data) => {
+                return (
+                  <Stats
+                    top={` ${data?.transactionStatistics?.totalSalesAmmount.toFixed(
+                      2
+                    )}$ `}
+                    bottem={"Total sale amount"}
+                  />
+                );
+              }}
+            </Await>
+          </Suspense>
+          <Suspense fallback={<h1>Loading</h1>}>
+            <Await resolve={data.statsData}>
+              {(data) => {
+                return (
+                  <Stats
+                    top={data?.transactionStatistics?.TotalNumberOfSold}
+                    bottem={"Total number of sold items"}
+                  />
+                );
+              }}
+            </Await>
+          </Suspense>
+          <Suspense fallback={<h1>Loading</h1>}>
+            <Await resolve={data.statsData}>
+              {(data) => {
+                return (
+                  <Stats
+                    top={data?.transactionStatistics?.TotalNumber0fNotSold}
+                    bottem={"Total number of not sold items"}
+                  />
+                );
+              }}
+            </Await>
+          </Suspense>
         </div>
         <TrasnsactionTable
           search={search}
@@ -104,11 +128,31 @@ const Home = () => {
         />
       </div>
       <div className={styles.graphNchart}>
-        <BarGraph statsData={data.statsData} month={month} />
-        <PiChart statsData={data.statsData} />
+        <Suspense fallback={blockLoader()}>
+          <Await resolve={data.statsData}>
+            {(data) => {
+              return <BarGraph statsData={data} month={month} />;
+            }}
+          </Await>
+        </Suspense>
+        <Suspense fallback={blockLoader()}>
+          <Await resolve={data.statsData}>
+            {(data) => {
+              return <PiChart statsData={data.itemsPerCatagory} />;
+            }}
+          </Await>
+        </Suspense>
       </div>
     </main>
   );
 };
 
 export default Home;
+
+function blockLoader() {
+  return (
+    <div className={styles.blockLoader}>
+      <h1>Loading</h1>
+    </div>
+  );
+}
