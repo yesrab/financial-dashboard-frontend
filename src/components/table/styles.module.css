@@ -1,0 +1,119 @@
+.tableContainer {
+  background-color: #272953;
+  padding: 1em;
+  border-radius: 10px;
+  flex-grow: 1;
+  width: auto;
+  max-height: 50vh;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.quearyContainer {
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchBox {
+  outline: none;
+  width: 24%;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  font-size: 1em;
+  margin-left: 1em;
+  height: 2em;
+  background-color: #16113a;
+  color: whitesmoke;
+}
+
+.searchBox:focus {
+  outline: 5px solid #6464de;
+}
+
+.monthSelector {
+  margin-right: 1em;
+  border-radius: 10px;
+  height: 2em;
+  background-color: #16113a;
+  color: whitesmoke;
+}
+
+.tableWrapper {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  overflow-y: auto;
+  max-height: 80%;
+  border: 2px solid seashell;
+  border-radius: 8px;
+  border-collapse: collapse;
+}
+
+/* Customizing scrollbar track */
+.tableWrapper::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+/* Handle */
+.tableWrapper::-webkit-scrollbar-thumb {
+  background-color: #6464de; /* Color of the scrollbar handle */
+  border-radius: 10px; /* Rounded corners of the handle */
+}
+
+/* Track */
+.tableWrapper::-webkit-scrollbar-track {
+  background: #16113a; /* Color of the scrollbar track */
+  border-radius: 10px; /* Rounded corners of the track */
+}
+
+.tableBlockContainer {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+}
+
+.tabeHeadRow {
+  background-color: #272953;
+  border: 1px solid snow;
+  padding-left: 5px;
+  padding-right: 5px;
+  position: sticky;
+  top: 0;
+}
+
+.rowData {
+  font-size: 12px;
+  border: 1px solid snow;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.loading {
+  border: 2px solid white;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.loadingText {
+  text-align: center;
+}
+
+.paginatorTool {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.paginatorButtons {
+  display: flex;
+  gap: 5px;
+}
+
+.paginatorBtns {
+  border: 2px solid snow;
+  border-radius: 8px;
+  padding: 0 5px 0 5px;
+  font-weight: 500;
+}

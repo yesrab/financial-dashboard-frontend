@@ -1,0 +1,33 @@
+.mainContent {
+  padding: 0.5% 1% 1% 1%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.tableNstatisticsContainer {
+  display: flex;
+  /* justify-content: space-around; */
+  gap: 10px;
+}
+
+.statisticsContainer {
+  width: 80%;
+  padding: 1%;
+  background-color: #272953;
+  border-radius: 10px;
+  /* margin: 5px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1em;
+}
+
+.graphNchart {
+  margin-top: auto;
+  padding: 1%;
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  justify-content: space-between;
+}
