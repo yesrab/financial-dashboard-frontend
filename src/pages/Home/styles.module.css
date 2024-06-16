@@ -12,11 +12,11 @@
 }
 
 .statisticsContainer {
-  width: 80%;
+  /* width: 80%; */
+  min-width: 20%;
   padding: 1%;
-  background-color: #272953;
+  background-color: #5aa0eb;
   border-radius: 10px;
-  /* margin: 5px; */
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -33,7 +33,7 @@
 }
 
 .blockLoader {
-  background-color: #272953;
+  background-color: #5aa0eb;
   border-radius: 10px;
   flex-grow: 1;
   height: 50vh;

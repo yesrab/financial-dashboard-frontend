@@ -1,5 +1,5 @@
 .tableContainer {
-  background-color: #272953;
+  background-color: #5aa0eb;
   padding: 1em;
   border-radius: 10px;
   flex-grow: 1;
@@ -30,7 +30,7 @@
 }
 
 .searchBox:focus {
-  outline: 5px solid #6464de;
+  outline: 5px solid whitesmoke;
 }
 
 .monthSelector {
@@ -75,7 +75,7 @@
 }
 
 .tabeHeadRow {
-  background-color: #272953;
+  background-color: #5aa0eb;
   border: 1px solid snow;
   padding-left: 5px;
   padding-right: 5px;
